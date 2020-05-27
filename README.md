@@ -1,1 +1,4 @@
-# vscode-pdf-syntax-highlight
+# pdf README
+
+PDF syntax highlighter
+

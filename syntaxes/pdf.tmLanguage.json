@@ -1,0 +1,99 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "pdf",
+	"foldingStartMarker": "^[0-9]+ [0-9]+ obj$",
+	"foldingStopMarker": "^endobj$",
+	"patterns": [{
+			"include": "#comments"
+		},
+		{
+			"include": "#dictionary"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		}, {
+			"include": "#strings-hex"
+		},
+		{
+			"include": "#entity"
+		},
+		{
+			"include": "#stream"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [{
+				"name": "comment",
+				"match": "^[ ]*%.*"
+			}]
+		},
+		"dictionary": {
+			"patterns": [{
+					"name": "meta.brace.round",
+					"match": "<<"
+				},
+				{
+					"name": "meta.brace.round",
+					"match": ">>"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.pdf",
+				"match": "\\b(xref|startxref|trailer)\\b"
+			}, {
+				"name": "keyword.control.pdf",
+				"match": "[0-9]+ [0-9]+ obj"
+			}, {
+				"name": "keyword.control.pdf",
+				"match": "\\b(endobj)\\b"
+			}, {
+				"name": "variable.language",
+				"match": "\\b(w|J|j|M|d|ri|i|gs|q|Q|cm|cs|CS|SC|SCN|G|g|RG|rg|K|k|m|l|c|v|y|h|re|S|s|f|F|f\\*|B|B\\*|b|b\\*|n|W|W\\*|sh|BI|ID|EI|Do|Tc|Tw|Tz|TL|Tf|Tr|Ts|Td|TD|Tm|T\\*|do|d1|MP|DP|BMC|BDC|EMC|BX|EX|BT|ET|Tj|TJ|Tf|Tc|Tw|Td|cm|stream|endstream)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.single.pdf",
+			"begin": "\\((?!\/)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.begin.pdf"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.pdf"
+				}
+			},
+			"patterns": [{
+				"name1": "string.quoted.single.pdf",
+				"match1": "[_$[:print:]]*"
+			}, {
+				"match": "\\\\.",
+				"name": "constant.character.escaped.pdf"
+			}]
+		},
+		"strings-hex": {
+			"name": "string.quoted.single.pdf",
+			"begin": "<[[:xdigit:]]",
+			"end": "[[:xdigit:]]+>",
+			"patterns": [{
+				"name": "string.quoted.single.pdf",
+				"match": "[[:xdigit:]]*"
+			}]
+		},
+		"entity": {
+			"patterns": [{
+				"name": "variable.language",
+				"match": "\/([[:alnum:]]|[[:punct:]])*"
+			}]
+		}
+	},
+	"scopeName": "source.pdf"
+}
